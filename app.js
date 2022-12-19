@@ -1,7 +1,23 @@
 const http = require("http")
 const fs = require('fs');
+const { rejects } = require("assert");
+const { resolveSoa } = require("dns");
 
 const PORT = 4000;
+
+const fun1 = ()=>(console.log('fun1'))
+const fun2 = ()=>(console.log('fun2'))
+const fun3 = ()=>(
+    console.log('fun3'),
+    setTimeout(fun1,0),
+    new Promise((resolve,reject)=>{
+        resolve('i am a promise')
+    }).then((res)=>{
+        console.log(res)
+    }),
+    fun2()
+    )
+    fun3()
 
 const server =http.createServer((req,res)=>{
     if(req.url==='/'){
