@@ -16,7 +16,7 @@ router.get('/',(req,res)=>{
     event.emit("server called")
 })
 
-router.use(bookRouter);
+router.use(('/book'),bookRouter);
 
 router.all('/*',(req,res)=>{
     res.send("page not found...")

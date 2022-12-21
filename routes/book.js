@@ -3,7 +3,7 @@ const bookRouter = express.Router()
 
 
 bookRouter
-.route('/book')
+.route('/')
 .get((req,res)=>{
     res.send("book")
 })
@@ -13,7 +13,7 @@ bookRouter
 
 
 
-bookRouter.get("/book/:id",(req,res)=>{
+bookRouter.get("/:id",(req,res)=>{
     // console.log(req.params.id)
     res.send(`book with id: ${req.params.id}`)
 })
