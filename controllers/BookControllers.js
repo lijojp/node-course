@@ -10,9 +10,15 @@ exports.index = async(req,res)=>{
     res.json(books)
 }
 exports.store = async(req,res)=>{
-    const db = await connect()
-    await db.collection("book").insertOne(req.body)
-    res.status(201).json()
+    // const db = await connect()
+    // await db.collection("book").insertOne(req.body)
+    try {
+        await Book.create(req.body)
+        res.status(201).json({data : "book is stored"})
+        
+    } catch (error) {
+        res.json(error.errors)
+    }
 }
 
 exports.show = async(req,res)=>{
