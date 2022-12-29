@@ -10,13 +10,11 @@ bookRouter
     const books = await db.collection("book").find().toArray();
     res.json(books)
 })
-.post(async(req,res)=>{
+.post(async(req,res)=>{ 
+      
     const db = await connect()
-    const data ={
-        title:'Power of consistancy',
-        author: "unknown"
-    }
-    await db.collection('book').insertOne(data)
+   
+    await db.collection('book').insertOne(req.body)
     res.json({data:'book is stored'})
 })
 
