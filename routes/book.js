@@ -1,20 +1,37 @@
 const express = require('express')
 const bookRouter = express.Router()
+const connect = require("../database/db")
 
 
 bookRouter
 .route('/')
-.get((req,res)=>{
-    res.send("book")
+.get(async(req,res)=>{
+    const db = await connect()
+    const books = await db.collection("book").find().toArray();
+    res.json(books)
 })
-.post((req,res)=>{
+.post(async(req,res)=>{
+    const db = await connect()
+    const data ={
+        title:'Power of consistancy',
+        author: "unknown"
+    }
+    await db.collection('book').insertOne(data)
     res.json({data:'book is stored'})
 })
 
 
 
-bookRouter.get("/:id",(req,res)=>{
+bookRouter
+.route('/:id')
+.get((req,res)=>{
     // console.log(req.params.id)
+    res.send(`book with id: ${req.params.id}`)
+})
+.patch((req,res)=>{
+    res.send(`book with id: ${req.params.id}`)
+})
+.delete((req,res)=>{
     res.send(`book with id: ${req.params.id}`)
 })
 
