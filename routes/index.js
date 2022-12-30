@@ -5,6 +5,7 @@ const event = new EventEmitter
 const path = require('path')
 
 const bookRouter = require('./book')
+const authRouter = require("./auth")
 
 // let count = 1;
 // event.on("server called",()=>{
@@ -22,6 +23,8 @@ router.get('/',(req,res)=>{
 })
 
 router.use(('/book'),bookRouter);
+
+router.use(("/auth"),authRouter)
 
 router.all('/*',(req,res)=>{
     res.send("page not found...")
